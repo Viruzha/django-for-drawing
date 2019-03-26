@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘图页面</title>
+</head>
+<body onload="draw()" bgcolor="#2C2C4C">
+    <canvas id="map" width="1300" height="500"></canvas><br>
+    <canvas id="reminder" width="1300" height="100"></canvas><br>
+    <a href="{% url 'index' %}">返回首页</a>
+    <script type="text/javascript">
+    function draw(){
+        var canvas=document.getElementById("map")
+        var reminder=document.getElementById("reminder")
+        var xs={{mapdotx|safe}}
+        var ys={{mapdoty|safe}}
+        var c={{mapc|safe}}
+        if(canvas.getContext){
+            
+            var dot=canvas.getContext('2d')
+            var c1=0
+            var c0=0
+            for (var i=0;i<xs.length;i++){
+                if(c[i]==1){
+                    dot.fillStyle="#2BD54D"
+                    dot.fillRect(xs[i],ys[i],1,1) 
+                    c1=c1+1
+                }
+                else{
+                    dot.fillStyle="#FF0033"
+                    dot.fillRect(xs[i],ys[i],1,1)
+                    c0=c0+1
+                }          
+            }             
+        }
+        if(reminder.getContext){
+            var minder=reminder.getContext('2d')
+            minder.fillStyle="#2BD54D"
+            minder.fillRect(200,40,20,20)
+            minder.font="30px Arial"
+            minder.fillText("出城 计数:",230,60)
+            minder.fillText(c1,370,60)
+            minder.fillStyle="#FF0033"
+            minder.fillRect(680,40,20,20)
+            minder.fillText("进城 计数:",710,60)
+            minder.fillText(c0,850,60)
+                    }
+
+    }
+    
+    
+    </script>
+
+
+
+
+
+</body>
+</html>
+
